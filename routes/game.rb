@@ -83,6 +83,7 @@ class Api
                 engine = Engine::GAMES_BY_TITLE[game.title].new(
                   users.map(&:name),
                   id: game.id,
+                  settings: game.settings,
                   actions: actions_h(game),
                 )
 

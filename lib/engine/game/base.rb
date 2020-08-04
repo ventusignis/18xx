@@ -151,7 +151,6 @@ module Engine
       IPO_NAME = 'IPO'
 
       CACHABLE = [
-        %i[players player],
         %i[corporations corporation],
         %i[companies company],
         %i[trains train],
@@ -254,7 +253,7 @@ module Engine
         const_set(:LAYOUT, data['layout'].to_sym)
       end
 
-      def initialize(names, id: 0, actions: [], pin: nil, strict: false)
+      def initialize(names, id: 0, actions: [], settings: nil, strict: false)
         @id = id
         @turn = 1
         @loading = false
@@ -262,9 +261,10 @@ module Engine
         @finished = false
         @log = []
         @actions = []
+
         @names = names.freeze
         @players = @names.map { |name| Player.new(name) }
-
+        @settings = settings || {}
         @seed = @id.to_s.scan(/\d+/).first.to_i % RAND_M
 
         case self.class::DEV_STAGE
@@ -317,6 +317,7 @@ module Engine
 
         initialize_actions(actions)
 
+        pin = @settings['pin']
         return unless pin
 
         @log << '----'
@@ -453,7 +454,7 @@ module Engine
       end
 
       def clone(actions)
-        self.class.new(@names, id: @id, pin: @pin, actions: actions)
+        self.class.new(@names, id: @id, settings: @settings, actions: actions)
       end
 
       def trains
@@ -1059,6 +1060,19 @@ module Engine
           self.class.define_method("#{name}_by_id") do |id|
             instance_variable_get(ivar)[id]
           end
+        end
+
+        # Players contains players and their aliases
+        @players_with_aliases = {}
+        player_aliases = @settings['aliases'] || {}
+
+        @players.each do |p|
+          @players_with_aliases[p.id] = p
+          player_aliases[p.id]&.each { |a| @players_with_aliases[a] = p }
+        end
+
+        self.class.define_method('player_by_id') do |id|
+          @players_with_aliases[id]
         end
       end
 

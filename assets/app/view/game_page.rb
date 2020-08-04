@@ -55,13 +55,13 @@ module View
         @game_data['players'].map { |p| p['name'] },
         id: game_id,
         actions: cursor ? actions.take(cursor) : actions,
-        pin: @pin,
+        settings: @settings,
       )
       store(:game, @game, skip: true)
     end
 
     def render
-      @pin = @game_data.dig('settings', 'pin')
+      @settings = @game_data['settings']
 
       if @disable_user_errors
         # Opal exceptions lack backtraces, so do this outside of a rescue in dev mode to preserve the backtrace
