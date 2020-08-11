@@ -162,7 +162,7 @@ module Engine
           it 'matches result exactly' do
             game_path = game.title.gsub(/(.)([A-Z])/, '\1_\2').downcase
             data = JSON.parse(File.read("spec/fixtures/#{game_path}/#{game_id}.json"))
-            players = data['players'].map { |p| p['name'] }
+            players = data['players'].map { |p| [p['name'], p['name']] }.to_h
             expect(game.new(players, id: game_id, actions: data['actions']).result).to eq(result)
             rungame = game.new(players, id: game_id, actions: data['actions'], strict: true)
             expect(rungame.result).to eq(result)

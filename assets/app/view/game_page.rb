@@ -51,17 +51,19 @@ module View
       return if game_id == @game&.id &&
         ((!cursor && @game.actions.size == @num_actions) || (cursor == @game.actions.size))
 
+      # Hotseat doesn't have player ids, use names instead.
+      players = @game_data['players'].map { |p| [p['id'] || p['name'], p['name']] }.to_h
       @game = Engine::GAMES_BY_TITLE[@game_data['title']].new(
-        @game_data['players'].map { |p| p['name'] },
+        players,
         id: game_id,
         actions: cursor ? actions.take(cursor) : actions,
-        settings: @settings,
+        pin: @pin,
       )
       store(:game, @game, skip: true)
     end
 
     def render
-      @settings = @game_data['settings']
+      @pin = @game_data.dig('settings', 'pin')
 
       if @disable_user_errors
         # Opal exceptions lack backtraces, so do this outside of a rescue in dev mode to preserve the backtrace

@@ -10,8 +10,9 @@ require 'engine/step/waterfall_auction'
 
 module Engine
   describe Round::Auction do
+    let(:players) { %w[a b c].map { |p| [p, p] }.to_h }
     let(:game) do
-      game = Game::G1889.new(%w[a b c])
+      game = Game::G1889.new(players)
       game.companies.slice!(3..-1)
       game
     end

@@ -100,8 +100,7 @@ module View
 
     def render_individual_tile_from_game(game_title, hex_or_tile_id)
       game_class = Engine::GAMES_BY_TITLE[game_title]
-      players = Engine.player_range(game_class).max.times.map { |n| "Player #{n + 1}" }
-      game = game_class.new(players)
+      game = game_class.create_with_max_players
 
       id, rotation = hex_or_tile_id.split('-')
       rotations = rotation ? [rotation.to_i] : @rotations
@@ -129,8 +128,7 @@ module View
     end
 
     def map_hexes_and_tile_manifest_for(game_class)
-      players = Engine.player_range(game_class).max.times.map { |n| "Player #{n + 1}" }
-      game = game_class.new(players)
+      game = game_class.create_with_max_players
 
       # map_tiles: hash; key is hex ID, value is the Tile there
       map_tiles = game.hexes.map { |h| [h.name, h.tile] }.to_h

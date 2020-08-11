@@ -2,10 +2,12 @@
 
 require './spec/spec_helper'
 require 'engine/player'
+require 'engine/game/g_1889'
 
 module Engine
   describe Player do
-    let(:game) { Game::G1889.new(%w[a b c]) }
+    let(:players) { %w[a b c].map { |p| [p, p] }.to_h }
+    let(:game) { Game::G1889.new(players) }
     let(:corporation) { game.corporations.first }
     let(:company) { game.companies.first }
     let(:share_pool) { game.share_pool }

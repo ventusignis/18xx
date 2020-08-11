@@ -112,7 +112,7 @@ module Engine
 
       def setup
         # When creating a game the game will not have enough to start
-        return unless @players.size.between?(*Engine.player_range(self.class))
+        return unless @players.size.between?(*self.class.player_range)
 
         remove_from_group!(ORANGE_GROUP, @companies) do |company|
           if company.id == 'LSL'

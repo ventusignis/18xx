@@ -9,6 +9,7 @@ require 'json'
 module Engine
   describe Game::G1889 do
     let(:players) { %w[a b] }
+    let(:players_map) { players.map { |p| [p, p] }.to_h }
 
     let(:actions) do
       [
@@ -21,7 +22,7 @@ module Engine
 
     context 'on init with actions' do
       let(:players) { %w[a b c] }
-      subject(:subject_with_actions) { Game::G1889.new(players, actions: actions) }
+      subject(:subject_with_actions) { Game::G1889.new(players_map, actions: actions) }
       it 'should process constructor actions' do
         expect(subject_with_actions.actions.size).to be 4
         expect(subject_with_actions.current_entity.name).to be players[1]
@@ -108,7 +109,7 @@ module Engine
       end
     end
 
-    subject { Game::G1889.new(players) }
+    subject { Game::G1889.new(players_map) }
 
     context 'on init' do
       it 'starts with correct cash' do
