@@ -25,6 +25,12 @@ module Engine
         'remove_tokens' => ['Remove Tokens', 'Warrior Coal Field token removed']
       ).freeze
 
+      STATUS_TEXT = Base::STATUS_TEXT.merge(
+        'can_buy_companies_from_other_players' => ['Interplayer Company Buy', 'Companies can be bought between players']
+      ).merge(
+        Step::SingleDepotTrainBuyBeforePhase4::STATUS_TEXT
+      ).freeze
+
       ROUTE_BONUSES = %i[atlanta_birmingham mobile_nashville].freeze
 
       include CompanyPrice50To150Percent
