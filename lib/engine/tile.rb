@@ -17,7 +17,7 @@ module Engine
     attr_accessor :hex, :icons, :index, :legal_rotations, :location_name, :name, :reservations, :upgrades
     attr_reader :blocks_lay, :borders, :cities, :color, :edges, :junction, :nodes, :label,
                 :parts, :preprinted, :rotation, :stops, :towns, :offboards, :blockers,
-                :city_towns, :unlimited, :stubs, :partitions, :id
+                :city_towns, :unlimited, :stubs, :partitions, :id, :destination
 
     ALL_EDGES = [0, 1, 2, 3, 4, 5].freeze
 
@@ -138,6 +138,8 @@ module Engine
         junction = Part::Junction.new
         cache << junction
         junction
+      when 'destination'
+        Part::Destination.new(image: params['image'], sticky: true, blocks_lay: false, corporation: params['corporation'], minor: params['minor'])
       when 'icon'
         Part::Icon.new(params['image'], params['name'], params['sticky'], params['blocks_lay'])
       when 'stub'
@@ -177,6 +179,7 @@ module Engine
       @stops = nil
       @edges = nil
       @junction = nil
+      @destinations = []
       @icons = []
       @location_name = location_name
       @legal_rotations = []
@@ -501,6 +504,10 @@ module Engine
           @borders << part
         elsif part.junction?
           @junction = part
+        elsif part.destination?
+          @destinations << part
+          # A destination also acts as an icon while still being a logically distinct feature
+          @icons << part
         elsif part.icon?
           @icons << part
         elsif part.stub?
