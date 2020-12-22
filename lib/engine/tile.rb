@@ -281,6 +281,11 @@ module Engine
       @preferred_city_town_edges ||= compute_city_town_edges
     end
 
+    def add_destination!(destination)
+      @icons << destination
+      @destinations << destination
+    end
+
     def reserved_by?(corporation)
       @reservations.any? { |r| [r, r.owner].include?(corporation) }
     end
