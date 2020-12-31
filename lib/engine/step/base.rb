@@ -80,6 +80,10 @@ module Engine
         true
       end
 
+      def can_merge?
+        false
+      end
+
       def setup; end
 
       def unpass!
