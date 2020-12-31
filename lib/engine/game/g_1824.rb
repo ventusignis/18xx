@@ -60,18 +60,6 @@ module Engine
         []
       end
 
-      def init_corporations(stock_market)
-        min_price = stock_market.par_prices.map(&:price).min
-
-        self.class::CORPORATIONS.map do |corporation|
-          Engine::Corporation.new(
-            min_price: min_price,
-            capitalization: self.class::CAPITALIZATION,
-            **corporation.merge(corporation_opts),
-          )
-        end
-      end
-
       def setup
         @coal_corporations = %w[EPP EOD MLB SPB].map { |c| corporation_by_id(c) }
 
