@@ -754,7 +754,7 @@ module Engine
       "offboard=revenue:yellow_0,groups:Mexico;path=a:2,b:_0;path=a:3,b:_0;path=a:4,b:_0;border=edge:1;border=edge:5": [
         "I11"
       ],
-      "offboard=revenue:yellow_0,groups:Mexico;path=a:3,b:_0;border=edge:2;border=edge:5": [
+      "offboard=revenue:yellow_0,groups:Mexico;path=a:3,b:_0;path=a:4,b:_0;border=edge:2;border=edge:5": [
         "J12"
       ],
       "offboard=revenue:yellow_0,groups:Mexico;path=a:3,b:_0;border=edge:2": [
