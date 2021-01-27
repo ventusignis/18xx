@@ -6,16 +6,17 @@ module Engine
   module Ability
     class Token < Base
       attr_reader :hexes, :teleport_price, :extra, :from_owner, :discount, :city,
-                  :neutral, :cheater, :special_only
+                  :neutral, :cheater, :special_only, :from_operator
 
       def setup(hexes:, price: nil, teleport_price: nil, extra: nil,
                 from_owner: nil, discount: nil, city: nil, neutral: nil,
-                cheater: nil, special_only: nil)
+                cheater: nil, special_only: nil, from_operator: nil)
         @hexes = hexes
         @price = price
         @teleport_price = teleport_price
         @extra = extra || false
         @from_owner = from_owner || false
+        @from_operator = from_operator || false
         @discount = discount
         @city = city
         @neutral = neutral || false

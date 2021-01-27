@@ -61,6 +61,7 @@ module Engine
         Round::Operating.new(self, [
           Step::Bankrupt,
           Step::G18FL::Assign,
+          Step::G18FL::SpecialToken,
           Step::Exchange,
           Step::G18FL::Convert,
           Step::SpecialTrack,

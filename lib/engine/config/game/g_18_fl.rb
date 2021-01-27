@@ -213,13 +213,14 @@ module Engine
       "abilities": [
         {
           "type": "token",
-          "when": "owning_corp_or_turn",
-          "owner_type":"corporation",
+          "when": "any",
+          "extra": "true",
+          "owner_type":"player",
           "count": 1,
-          "from_owner": true,
+          "from_operator": true,
           "cheater": 0,
-          "special_only": true,
-          "discount": 0,
+          "price": 0,
+          "teleport_price": 0,
           "hexes": [
             "B5", "B15", "B23", "G20", "F23", "J27", "K28"
           ]

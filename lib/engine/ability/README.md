@@ -255,7 +255,12 @@ Modified station token placement
   in the city; the `cheater` value; one slot higher than the city actually has,
   effectively increasing the city's size by one. (See 18 Los Angeles's optional
   company "Dewey, Cheatham, and Howe" or the corporations which get removed in
-  1846 2p Variant for examples). Default nil.
+  1846 2p Variant for examples). Default nil.\
+- `city`: ?
+- `neutral`: ?
+- `discount`: ?
+- `from_operator`: The token should be taken from the current operating entity. Default false
+- `from_owner`: The token should be taken from the owner of the Company with this ability. Default false
 - `special_only`: If true, this ability may only be used by explicitly
   activating the company to which it belongs (i.e., using the `SpecialTrack`
   step); if unset or false, `Engine::Step::Tokener#adjust_token_price_ability!`
