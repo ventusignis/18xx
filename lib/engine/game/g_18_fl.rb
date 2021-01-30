@@ -80,6 +80,10 @@ module Engine
         @steamboat ||= company_by_id('POSC')
       end
 
+      def terminal_co
+        @terminal_co ||= company_by_id('TC')
+      end
+
       def revenue_for(route, stops)
         revenue = super
 

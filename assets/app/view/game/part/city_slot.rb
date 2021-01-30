@@ -112,8 +112,12 @@ module View
             # If there's a choice of tokens of different types show the selector, otherwise just place
             next_tokens = step.available_tokens(entity)
             if next_tokens.size == 1 && actions.include?('place_token')
+              tokener = @selected_company && !@selected_company.owned_by_player? ?
+                  @selected_company :
+                  @game.current_entity
+              puts @selected_company, @game.current_entity, next_tokens, tokener
               action = Engine::Action::PlaceToken.new(
-                @selected_company || @game.current_entity,
+                tokener,
                 city: @city,
                 slot: cheater || @slot_index,
                 token_type: next_tokens[0].type

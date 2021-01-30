@@ -263,28 +263,19 @@ module Engine
       "sym": "ER",
       "abilities": [
         {
-          "type": "blocks_hexes",
-          "owner_type": "player",
-          "hexes": [
-            "C4"
-          ]
-        },
-        {
           "type": "tile_lay",
+          "owner_type": "corporation",
+          "count": 2,
+          "free": true,
+          "special": false,
+          "reachable": true,
           "hexes": [
-            "C4"
           ],
           "tiles": [
-            "12",
-            "13",
-            "14",
-            "15",
-            "205",
-            "206"
           ],
           "when": "sold",
-          "owner_type": "corporation",
-          "count": 1
+          "blocks": "true",
+          "owner_type": "corporation"
         }
       ]
     },
